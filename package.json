@@ -1,0 +1,14 @@
+{
+  "name": "sterownik-bramy",
+  "version": "1.0.0",
+  "description": "Zdalne sterowanie bramą przez ESP32",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^10.0.13"
+  }
+}
