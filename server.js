@@ -23,12 +23,16 @@ let verificationCode = null;
 let verificationExpires = null;
 
 const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    family: 4,
     auth: {
         user: GMAIL_USER,
         pass: GMAIL_APP_PASSWORD
     }
 });
+
 
 app.use(express.json());
 app.use(express.static("public"));
