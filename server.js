@@ -1,6 +1,6 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
 const app = express();
 
@@ -22,16 +22,7 @@ let pendingCommand = false;
 let verificationCode = null;
 let verificationExpires = null;
 
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    family: 4,
-    auth: {
-        user: GMAIL_USER,
-        pass: GMAIL_APP_PASSWORD
-    }
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 app.use(express.json());
@@ -66,12 +57,13 @@ app.post("/api/login", async (req, res) => {
 
     try {
 
-        await transporter.sendMail({
-            from: GMAIL_USER,
-            to: GMAIL_TO,
-            subject: "Kod logowania - Sterowanie bramą",
-            text: `Twój kod logowania: ${code}\n\nKod jest ważny przez 5 minut.`
-        });
+        await resend.emails.send({
+    from: "onboarding@resend.dev",
+    to: GMAIL_TO,
+    subject: "Kod logowania - Sterowanie bramą",
+    html: `<p>Twój kod logowania: <strong>${code}</strong></p>
+           <p>Kod jest ważny przez 5 minut.</p>`
+});
 
         console.log("Wysłano kod 2FA");
 
