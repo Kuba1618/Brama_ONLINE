@@ -57,13 +57,15 @@ app.post("/api/login", async (req, res) => {
 
     try {
 
-        await resend.emails.send({
-    from: "onboarding@resend.dev",
-    to: GMAIL_TO,
-    subject: "Kod logowania - Sterowanie bramą",
-    html: `<p>Twój kod logowania: <strong>${code}</strong></p>
+       const result = await resend.emails.send({
+     	from: "onboarding@resend.dev",
+    	to: GMAIL_TO,
+    	subject: "Kod logowania - Sterowanie bramą",
+    	html: `<p>Twój kod logowania: <strong>${code}</strong></p>
            <p>Kod jest ważny przez 5 minut.</p>`
-});
+	});
+
+	console.log("RESEND:", result);
 
         console.log("Wysłano kod 2FA");
 
