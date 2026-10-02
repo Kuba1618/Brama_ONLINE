@@ -34,6 +34,7 @@ app.use(express.static("public"));
 // =============================
 
 app.post("/api/login", async (req, res) => {
+	console.log("LOGIN:", req.body);
 
     const { username, password } = req.body;
 
