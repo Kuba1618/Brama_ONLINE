@@ -60,7 +60,7 @@ app.post("/api/login", async (req, res) => {
 
        const result = await resend.emails.send({
      	from: "onboarding@resend.dev",
-    	to: "jakub.prusicki30@gmail.com",
+    	to: "jakub.prusicki1.618@gmail.com",
     	subject: "Kod logowania - Sterowanie bramą",
     	html: `<p>Twój kod logowania: <strong>${code}</strong></p>
            <p>Kod jest ważny przez 5 minut.</p>`
